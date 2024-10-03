@@ -25,7 +25,11 @@ coords = zip(lat, lon)
 lat_offset = abs(maxlat - minlat)/2
 lon_offset = abs(maxlon - minlon)/2
 
-osmReq = f"node({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});out;"
+osmReq = f"[out:xml];(way['highway'='footway']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['highway'='path']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['waterway']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});relation['waterway']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['natural'='water']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['landuse'='residential']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['landuse'='commercial']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['landuse'='industrial']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['landuse'='forest']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});relation['landuse']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['natural'='wood']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset}););out body;>;out skel qt;"
+
+#osmReq = f"[out:xml];(way['highway'='footway']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});way['highway'='path']({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset}););out body;>;out skel qt;"
+
+#osmReq = f"node({minlat-lat_offset},{minlon-lon_offset},{maxlat+lat_offset},{maxlon+lon_offset});out;"
 
 osmData = requests.post(url, data=osmReq.encode("utf-8"))
 
